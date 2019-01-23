@@ -47,17 +47,50 @@ route.post('/add', (req, res) => {
       console.log(data)
       return data.save()
     })
-    .then(data => res.send(data))
+    .then(data => {
+      let username = data.username
+      let log = data.log.sort((a, b) => b.date - a.date)
+      res.send({
+        status: 'success',
+        data: {username, log}
+      })
+    })
     .catch(err => res.send('error'))
     .catch(err => res.status(400).send({error: 'Invalid user ID'}))
 })
 
-
-
-route.get('/', (req, res) => {
-  Exercise.find()
+route.get('/log', (req, res) => {
+  let {userId, from, to, limit} = req.query
+  if(!userId) {
+    res.status(400).send({error: "userId is required"})
+  }
+  // console.log(req.query)
+  Exercise.findById({_id: userId})
     .then(data => {
-      res.send(data)
+      let log = data.log
+      if(!limit) limit = 100
+      if (!(from && to)) {
+        res.status(400).send({
+          error: "from and to must be filled"
+        })
+      }
+      if (!!from && !!to) {
+        from = new Date(from)
+        to = new Date(to)
+        if (from == "Invalid Date" || to == "Invalid Date") {
+          return res.status(400).send({
+            error: "from and to must be valid date"
+          })
+        }
+        log = log.filter(item => {
+          return item.date > from && item.date < to
+        })
+      }
+      log.sort((a, b) => b.date - a.date)
+      let length = log.length < limit ? log.length : limit
+      return res.status(200).send(log.slice(0, length));
     })
+    .catch(() => res.status(400).send({error: 'Invalid user ID'}))
 })
+
 module.exports = route
