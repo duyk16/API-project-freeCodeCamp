@@ -1,8 +1,12 @@
 const mongoose = require('mongoose')
 
-const productSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
+const exerciseSchema = new mongoose.Schema({
+  username: String,
+  log: [{
+    description: {type: String, required: true},
+    duration: {type: Number, required: true},
+    date: {type: Date, default: Date.now }
+  }]
 })
 
-module.exports = mongoose.model('Product', productSchema, 'products')
+module.exports = mongoose.model('Exercise', exerciseSchema, 'exercises')
