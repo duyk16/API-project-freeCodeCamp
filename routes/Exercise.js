@@ -69,11 +69,6 @@ route.get('/log', (req, res) => {
     .then(data => {
       let log = data.log
       if(!limit) limit = 100
-      if (!(from && to)) {
-        res.status(400).send({
-          error: "from and to must be filled"
-        })
-      }
       if (!!from && !!to) {
         from = new Date(from)
         to = new Date(to)
