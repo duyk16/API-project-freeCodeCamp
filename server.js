@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000
 const timeStampRoute = require('./routes/TimeStamp')
 const whoAmI = require('./routes/WhoAmI')
 const exercise = require('./routes/Exercise')
+const shortId = require('./routes/ShortId')
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
@@ -25,10 +26,14 @@ app.use(express.static('public'))
 app.use('/api/timestamp', timeStampRoute)
 app.use('/api/whoami', whoAmI)
 app.use('/api/exercise', exercise)
+app.use('/api/shorturl', shortId)
 
 // Send view to test exercise API 
 app.get('/exercise', (req, res) => {
   res.sendFile(__dirname + '/views/exercise/index.html')
+})
+app.get('/shortid', (req, res) => {
+  res.sendFile(__dirname + '/views/shortid/index.html')
 })
 
 app.listen(port, () => {console.log(`Listening on port ${port}...`)})
