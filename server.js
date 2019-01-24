@@ -32,7 +32,7 @@ app.use('/api/shorturl', shortId)
 app.get('/exercise', (req, res) => {
   res.sendFile(__dirname + '/views/exercise/index.html')
 })
-app.get('/shortid', (req, res) => {
+app.get('/shorturl', (req, res) => {
   res.sendFile(__dirname + '/views/shortid/index.html')
 })
 
