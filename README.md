@@ -5,5 +5,5 @@ This is one of certifications to become fullstack web developer at freeCodeCamp.
   - Timestamp Microservice. [Test link](https://steel-tray.glitch.me)
   - Request Header Parser Microservice. [Test link](https://broad-coffee.glitch.me/)
   - URL Shortener Microservice. [Test link](https://grove-notebook.glitch.me/)
-  - Exercise Tracker. [Test link] (https://hypnotic-cloak.glitch.me/)
+  - Exercise Tracker. [Test link](https://hypnotic-cloak.glitch.me/)
   - File Metadata Microservice. [Test link](https://loud-shaker.glitch.me/)
